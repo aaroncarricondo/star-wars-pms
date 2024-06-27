@@ -4,16 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 
-import { PlanetsProvider } from "../../contexts/PlanetsContext";
 import { darkTheme } from "../../theme";
 
 const Wrapper = ({ children }: PropsWithChildren) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <ToastContainer />
-      <PlanetsProvider>
-        <BrowserRouter>{children}</BrowserRouter>
-      </PlanetsProvider>
+      <BrowserRouter>{children}</BrowserRouter>
     </ThemeProvider>
   );
 };

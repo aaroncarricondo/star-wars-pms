@@ -1,36 +1,39 @@
 /// <reference lib="dom" />
 
 import { cleanup, screen } from "@testing-library/react";
-import { sleep } from "bun";
 import { afterEach, beforeAll, describe, expect, it, spyOn } from "bun:test";
 
+import * as PlanetsContext from "../contexts/PlanetsContext";
 import { PlanetList } from "../pages/PlanetList";
 import { customRender } from "./utils/customRender";
-import { getMockedFetch } from "./utils/mockedFetch";
-
-const errorMockedFetch = getMockedFetch({
-  ok: false,
-}) as never;
 
 describe("Planet list", () => {
   afterEach(() => {
     cleanup();
   });
 
-  describe("fetch fails", () => {
+  describe("some error occurred", () => {
     beforeAll(() => {
-      spyOn(window, "fetch").mockImplementation(errorMockedFetch);
+      spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
+        planets: [],
+        isLoading: false,
+        error: new Error("Some error"),
+        fetchData: async () => undefined,
+      }));
     });
 
-    it("should show an error", async () => {
+    it("should show a toast error", async () => {
       customRender(<PlanetList />);
-
-      // TODO: Remove it
-      await sleep(1);
 
       expect(
         screen.getByText("Error while retrieving planets data"),
       ).toBeTruthy();
+    });
+
+    it("should show empty table", async () => {
+      customRender(<PlanetList />);
+
+      expect(screen.getByText("No data")).toBeTruthy();
     });
   });
 
