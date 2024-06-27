@@ -3,6 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const darkTheme: DefaultTheme = {
   spacing: {
     none: "0",
+    extraSmall: "0.25rem",
     small: "0.5rem",
     normal: "1rem",
     large: "2rem",
@@ -19,4 +20,21 @@ export const darkTheme: DefaultTheme = {
     text: "#fafafa",
     separator: "#d9d9d9",
   },
+};
+
+const breakpoints = {
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1600,
+};
+
+export const mediaQueries = {
+  xs: `(max-width: ${breakpoints.sm - 1}px)`,
+  sm: `(min-width: ${breakpoints.sm}px)`,
+  md: `(min-width: ${breakpoints.md}px)`,
+  lg: `(min-width: ${breakpoints.lg}px)`,
+  xl: `(min-width: ${breakpoints.xl}px)`,
+  xxl: `(min-width: ${breakpoints.xxl}px)`,
 };

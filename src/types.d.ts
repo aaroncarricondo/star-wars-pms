@@ -4,6 +4,7 @@ declare module "styled-components" {
   export interface DefaultTheme {
     spacing: {
       none: string;
+      extraSmall: string;
       small: string;
       normal: string;
       large: string;

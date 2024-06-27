@@ -7,7 +7,10 @@ import { Input } from "../components/Input";
 import { PageHeader } from "../components/PageHeader";
 import { Space } from "../components/Space";
 import { Spinner } from "../components/Spinner";
+import { Table } from "../components/Table";
+import { ColumnDef } from "../components/Table/types";
 import { usePlanets } from "../contexts/PlanetsContext";
+import { APIPlanet } from "../domain/Planet";
 
 const SpinnerContainer = styled(Space)`
   height: 60vh;
@@ -23,6 +26,34 @@ export const PlanetList = () => {
       toast.error("Error while retrieving planets data");
     }
   }, [error, isLoading]);
+
+  const columns: ColumnDef<APIPlanet>[] = [
+    {
+      key: "name",
+      header: "Name",
+      dataIndex: "name",
+    },
+    {
+      key: "diameter",
+      header: "Diameter (km)",
+      dataIndex: "diameter",
+    },
+    {
+      key: "climate",
+      header: "Climate",
+      dataIndex: "climate",
+    },
+    {
+      key: "terrain",
+      header: "Terrain",
+      dataIndex: "terrain",
+    },
+    {
+      key: "population",
+      header: "Population",
+      dataIndex: "population",
+    },
+  ];
 
   return (
     <>
@@ -40,11 +71,14 @@ export const PlanetList = () => {
           <Spinner />
         </SpinnerContainer>
       ) : (
-        <ul>
-          {planets.map(({ name, url }) => (
-            <li key={url}>{name}</li>
-          ))}
-        </ul>
+        <Space $justify="center">
+          <Table
+            rowKeyGenerator={(item) => item.url}
+            data={planets}
+            isLoading={isLoading}
+            columns={columns}
+          />
+        </Space>
       )}
     </>
   );
