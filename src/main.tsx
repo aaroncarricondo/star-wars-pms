@@ -7,6 +7,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 import { PlanetsProvider } from "./contexts/PlanetsContext";
 import { Layout } from "./pages/Layout";
+import { NotFound } from "./pages/NotFound";
 import { PlanetDetails } from "./pages/PlanetDetails";
 import { PlanetList } from "./pages/PlanetList";
 import { darkTheme } from "./theme";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: ":id",
         element: <PlanetDetails />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

@@ -5,6 +5,8 @@ import { mediaQueries } from "../../theme";
 export const StyledTable = styled.table`
   width: 100%;
   max-width: 900px;
+
+  border-collapse: collapse;
 `;
 
 const paddingCss = css`
@@ -49,6 +51,9 @@ export const StyledTableHeader = styled.th<EllipsisProps>`
 export const StyledTableColumn = styled.td<EllipsisProps>`
   ${paddingCss}
   ${ellipsisCss}
+
+  border-bottom: ${({ theme }) =>
+    `${theme.border.width} solid ${theme.colors.separator}`};
 `;
 
 type StyledTableRowProps = {
