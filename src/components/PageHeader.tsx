@@ -16,7 +16,7 @@ type PageHeaderProps = {
 
 export const PageHeader = ({ title, toolbox }: PageHeaderProps) => {
   useEffect(() => {
-    document.title = `Star Wars PMS - ${title}`;
+    document.title = title;
   }, []);
 
   return (

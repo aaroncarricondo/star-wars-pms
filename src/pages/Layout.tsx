@@ -42,7 +42,7 @@ export const Layout = () => {
       <NavBar>
         <Space $align="center">
           <NavBarLogo src={RebelAllianceLogo}></NavBarLogo>
-          <NavBarTitle to="/">Star Wars - Planet Management System</NavBarTitle>
+          <NavBarTitle to="/">rebelalliance.org</NavBarTitle>
         </Space>
       </NavBar>
       <Content>

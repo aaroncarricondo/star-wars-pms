@@ -1,5 +1,6 @@
 import { render, RenderOptions } from "@testing-library/react";
 import { PropsWithChildren } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 
@@ -10,7 +11,9 @@ const Wrapper = ({ children }: PropsWithChildren) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <ToastContainer />
-      <PlanetsProvider>{children}</PlanetsProvider>
+      <PlanetsProvider>
+        <BrowserRouter>{children}</BrowserRouter>
+      </PlanetsProvider>
     </ThemeProvider>
   );
 };
