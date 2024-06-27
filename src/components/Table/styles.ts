@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { mediaQueries } from "../../theme";
 
 export const StyledTable = styled.table`
+  width: 100%;
   max-width: 900px;
 `;
 
@@ -48,4 +49,17 @@ export const StyledTableHeader = styled.th<EllipsisProps>`
 export const StyledTableColumn = styled.td<EllipsisProps>`
   ${paddingCss}
   ${ellipsisCss}
+`;
+
+type StyledTableRowProps = {
+  $isClickable?: boolean;
+};
+
+export const StyledTableRow = styled.tr<StyledTableRowProps>`
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.highlight};
+  }
+
+  cursor: ${({ $isClickable = false }) =>
+    $isClickable ? "pointer" : undefined};
 `;

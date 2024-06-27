@@ -1,22 +1,18 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { PageHeader } from "../components/PageHeader";
 import { Space } from "../components/Space";
-import { Spinner } from "../components/Spinner";
 import { Table } from "../components/Table";
 import { ColumnDef } from "../components/Table/types";
 import { usePlanets } from "../contexts/PlanetsContext";
 import { APIPlanet } from "../domain/Planet";
 
-const SpinnerContainer = styled(Space)`
-  height: 60vh;
-`;
-
 export const PlanetList = () => {
+  const navigate = useNavigate();
   const { planets, error, isLoading, fetchData } = usePlanets();
 
   useEffect(() => void fetchData());
@@ -55,6 +51,8 @@ export const PlanetList = () => {
     },
   ];
 
+  const onRowClick = (item: APIPlanet) => navigate(item.url);
+
   return (
     <>
       <PageHeader
@@ -66,20 +64,15 @@ export const PlanetList = () => {
           </Space>
         }
       />
-      {isLoading ? (
-        <SpinnerContainer $justify="center" $align="center">
-          <Spinner />
-        </SpinnerContainer>
-      ) : (
-        <Space $justify="center">
-          <Table
-            rowKeyGenerator={(item) => item.url}
-            data={planets}
-            isLoading={isLoading}
-            columns={columns}
-          />
-        </Space>
-      )}
+      <Space $justify="center">
+        <Table
+          rowKeyGenerator={(item) => item.url}
+          onRowClick={onRowClick}
+          data={planets}
+          isLoading={isLoading}
+          columns={columns}
+        />
+      </Space>
     </>
   );
 };

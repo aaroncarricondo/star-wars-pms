@@ -12,7 +12,7 @@ const NavBar = styled.nav`
   align-items: center;
   padding: 0 ${({ theme }) => theme.spacing.normal};
 
-  height: 48px;
+  height: ${({ theme }) => theme.navbarHeight};
   width: 100vw;
   position: fixed;
   top: 0;
@@ -33,7 +33,7 @@ const NavBarTitle = styled(Link)`
 
 const Content = styled.div`
   padding: ${({ theme }) => theme.spacing.normal};
-  margin-top: 48px;
+  margin-top: ${({ theme }) => theme.navbarHeight};
 `;
 
 export const Layout = () => {

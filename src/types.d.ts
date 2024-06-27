@@ -2,6 +2,7 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    navbarHeight: string;
     spacing: {
       none: string;
       extraSmall: string;

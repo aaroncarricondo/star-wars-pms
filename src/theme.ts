@@ -1,6 +1,7 @@
 import { DefaultTheme } from "styled-components";
 
 export const darkTheme: DefaultTheme = {
+  navbarHeight: "48px",
   spacing: {
     none: "0",
     extraSmall: "0.25rem",

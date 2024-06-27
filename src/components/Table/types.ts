@@ -14,4 +14,5 @@ export type TableProps<TData = never> = {
   columns: ColumnDef<TData>[];
   isLoading?: boolean;
   rowKeyGenerator: (item: TData) => Key;
+  onRowClick?: (item: TData) => void;
 };
