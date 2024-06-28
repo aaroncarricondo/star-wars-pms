@@ -8,6 +8,10 @@ In order to execute the application:
 
 
 ## Considerations
+### Packages
+The packages for this project have been selected to ensure minimum package dependency, while fastening development.
+
+### Forms
 Inferred from the data retrieved from the GraphQL API, the following restrictions where applied for the planet creation (form):
 1. Name -> Required.
 2. Diameter -> Optional.

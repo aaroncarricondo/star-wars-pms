@@ -12,7 +12,7 @@ export const FormLabel = styled.label<FormLabelProps>`
       ? `&:after {
         margin-inline-start: ${theme.spacing.extraSmall};
         content: "*";
-        color: red;
+        color: ${theme.colors.error};
       }`
       : ""}
 `;
