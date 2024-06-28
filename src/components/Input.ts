@@ -4,7 +4,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: none;
   border-bottom-style: solid;
-  border-bottom-color: ${({ theme }) => theme.colors.separator};
+  border-bottom-color: ${({ theme }) => theme.colors.text};
   border-bottom-width: ${({ theme }) => theme.border.width};
 
   font-family: "Oxanium";

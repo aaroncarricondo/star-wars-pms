@@ -19,7 +19,6 @@ export const darkTheme: DefaultTheme = {
     primary: "rgb(0, 221, 255)",
     highlight: "rgba(0, 221, 255, 0.1)",
     text: "#fafafa",
-    separator: "#d9d9d9",
   },
 };
 

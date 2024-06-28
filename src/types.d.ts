@@ -16,7 +16,6 @@ declare module "styled-components" {
       primary: string;
       highlight: string;
       text: string;
-      separator: string;
     };
     border: {
       radius: string;

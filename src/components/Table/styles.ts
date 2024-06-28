@@ -46,6 +46,13 @@ export const StyledTableHeader = styled.th<EllipsisProps>`
 
   ${paddingCss}
   ${ellipsisCss}
+
+  &:first-child {
+    border-top-left-radius: ${({ theme }) => theme.border.radius};
+  }
+  &:last-child {
+    border-top-right-radius: ${({ theme }) => theme.border.radius};
+  }
 `;
 
 export const StyledTableColumn = styled.td<EllipsisProps>`
@@ -53,7 +60,7 @@ export const StyledTableColumn = styled.td<EllipsisProps>`
   ${ellipsisCss}
 
   border-bottom: ${({ theme }) =>
-    `${theme.border.width} solid ${theme.colors.separator}`};
+    `${theme.border.width} solid ${theme.colors.headerBackground}`};
 `;
 
 type StyledTableRowProps = {
