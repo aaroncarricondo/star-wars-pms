@@ -9,6 +9,7 @@ import { Space } from "../../components/Space";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
+import { PlanetDeleteModal } from "./PlanetDeleteModal";
 import { PlanetInfo } from "./PlanetInfo";
 import { PlanetResidents } from "./PlanetResidents";
 
@@ -20,6 +21,7 @@ export const PlanetDetails = () => {
 
   const [planetData, setPlanetData] = useState<Planet>();
   const [planetNotFound, setPlanetNotFound] = useState(false);
+  const [deletePlanetOpen, setDeletePlanetOpen] = useState(false);
 
   const [fetchPlanetResidents, { data, loading, error }] =
     useLazyQuery(GET_PLANET_BY_ID);
@@ -40,14 +42,15 @@ export const PlanetDetails = () => {
     }
   }, [error]);
 
-  const onDelete = () => {
-    // TODO: Confirmation modal
-    planetsDispatch({
-      type: PlanetsActionType.Delete,
-      planetToRemoveId: planetId,
-    });
-
-    navigate("/");
+  const onPlanetDeleteClosed = (confirm: boolean) => {
+    setDeletePlanetOpen(false);
+    if (confirm) {
+      planetsDispatch({
+        type: PlanetsActionType.Delete,
+        planetToRemoveId: planetId,
+      });
+      navigate("/");
+    }
   };
 
   return (
@@ -59,7 +62,7 @@ export const PlanetDetails = () => {
           !planetNotFound && (
             <>
               <Button>Edit</Button>
-              <Button onClick={onDelete}>Delete</Button>
+              <Button onClick={() => setDeletePlanetOpen(true)}>Delete</Button>
             </>
           )
         }
@@ -73,6 +76,14 @@ export const PlanetDetails = () => {
             isLoading={loading}
           />
         </Space>
+      )}
+
+      {planetData && (
+        <PlanetDeleteModal
+          data={planetData}
+          open={deletePlanetOpen}
+          onClose={onPlanetDeleteClosed}
+        />
       )}
     </>
   );
