@@ -51,7 +51,12 @@ export const PlanetList = () => {
     },
   ];
 
-  const onRowClick = (item: APIPlanet) => navigate(item.url);
+  const onRowClick = (item: APIPlanet) => {
+    const id = item.url.split("/").at(-2);
+    if (id) {
+      navigate(id);
+    }
+  };
 
   return (
     <>

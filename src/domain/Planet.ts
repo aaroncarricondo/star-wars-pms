@@ -1,14 +1,15 @@
 export type APIPlanet = {
-  climate: string;
+  name: string;
   diameter: string;
+  climate: string;
+  terrain: string;
+  population: string;
+
   films: string[];
   gravity: string;
-  name: string;
   orbital_period: string;
-  population: string;
   residents: string[];
   rotation_period: string[];
   surface_water: string;
-  terrain: string;
   url: string;
 };

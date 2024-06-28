@@ -1,7 +1,16 @@
 /// <reference lib="dom" />
 
 import { cleanup, screen } from "@testing-library/react";
-import { afterEach, beforeAll, describe, expect, it, spyOn } from "bun:test";
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  mock,
+  spyOn,
+} from "bun:test";
+import * as ReactRouter from "react-router-dom";
 
 import * as PlanetsContext from "../contexts/PlanetsContext";
 import { PlanetList } from "../pages/PlanetList";
@@ -37,12 +46,53 @@ describe("Planet list", () => {
     });
   });
 
-  describe("toolbox", () => {
-    it("should be shown", () => {
+  describe("planets data is loading", () => {
+    it("should show a spinner inside the table", () => {
+      spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
+        planets: [],
+        isLoading: true,
+        error: undefined,
+        fetchData: async () => undefined,
+      }));
+
       customRender(<PlanetList />);
 
-      expect(screen.getByText("New planet", { selector: "button" }));
-      expect(screen.getByPlaceholderText("Search"));
+      expect(screen.getByTestId("spinner")).toBeTruthy();
+    });
+  });
+
+  describe("on user interaction", () => {
+    it("should navigate when clicking a table row", () => {
+      const mockedNavigationFunction = mock(() => undefined);
+      spyOn(ReactRouter, "useNavigate").mockImplementation(
+        () => mockedNavigationFunction,
+      );
+      spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
+        planets: [
+          {
+            name: "Tatooine",
+            climate: "",
+            diameter: "",
+            gravity: "",
+            orbital_period: "",
+            population: "",
+            residents: [],
+            rotation_period: [],
+            surface_water: "",
+            terrain: "",
+            url: "planets/1/",
+            films: [],
+          },
+        ],
+        isLoading: false,
+        error: undefined,
+        fetchData: async () => undefined,
+      }));
+
+      customRender(<PlanetList />);
+
+      screen.getByText("Tatooine").click();
+      expect(mockedNavigationFunction).toBeCalled();
     });
   });
 });
