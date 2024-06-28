@@ -4,17 +4,22 @@ import { PopupLayout } from "../../components/PopupLayout";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 
-type NewPlanetModalProps = {
+type EditPlanetModalProps = {
+  data: Planet;
   open: boolean;
   onClose: () => void;
 };
 
-export const NewPlanetModal = ({ open, onClose }: NewPlanetModalProps) => {
+export const EditPlanetModal = ({
+  data,
+  open,
+  onClose,
+}: EditPlanetModalProps) => {
   const { planetsDispatch } = usePlanets();
 
   const onSubmit = (newPlanet: Planet) => {
     planetsDispatch({
-      type: PlanetsActionType.Add,
+      type: PlanetsActionType.Edit,
       newPlanet,
     });
 
@@ -23,8 +28,8 @@ export const NewPlanetModal = ({ open, onClose }: NewPlanetModalProps) => {
 
   return (
     <Modal open={open} closeOnEscape={false} closeOnDocumentClick={false}>
-      <PopupLayout title="New planet">
-        <PlanetForm onSubmit={onSubmit} onCancel={onClose} />
+      <PopupLayout title="Edit planet">
+        <PlanetForm data={data} onSubmit={onSubmit} onCancel={onClose} />
       </PopupLayout>
     </Modal>
   );

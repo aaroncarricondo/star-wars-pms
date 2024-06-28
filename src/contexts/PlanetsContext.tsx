@@ -76,7 +76,7 @@ const planetsReducer = (state: Planet[], action: PlanetsAction) => {
 
         if (planetIndex !== -1) {
           const newState = [...state];
-          state[planetIndex] = action.newPlanet;
+          newState[planetIndex] = action.newPlanet;
           stateToReturn = newState;
         }
       }

@@ -9,6 +9,7 @@ import { Space } from "../../components/Space";
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
+import { EditPlanetModal } from "./EditPlanetModal";
 import { PlanetDeleteModal } from "./PlanetDeleteModal";
 import { PlanetInfo } from "./PlanetInfo";
 import { PlanetResidents } from "./PlanetResidents";
@@ -20,7 +21,9 @@ export const PlanetDetails = () => {
 
   const [planetData, setPlanetData] = useState<Planet>();
   const [planetNotFound, setPlanetNotFound] = useState(false);
+
   const [deletePlanetOpen, setDeletePlanetOpen] = useState(false);
+  const [editPlanetOpen, setEditPlanetOpen] = useState(false);
 
   const [fetchPlanetResidents, { data, loading, error }] =
     useLazyQuery(GET_PLANET_BY_ID);
@@ -49,7 +52,7 @@ export const PlanetDetails = () => {
           planetData &&
           !planetNotFound && (
             <>
-              <Button>Edit</Button>
+              <Button onClick={() => setEditPlanetOpen(true)}>Edit</Button>
               <Button onClick={() => setDeletePlanetOpen(true)}>Delete</Button>
             </>
           )
@@ -67,11 +70,18 @@ export const PlanetDetails = () => {
       )}
 
       {planetData && (
-        <PlanetDeleteModal
-          data={planetData}
-          open={deletePlanetOpen}
-          onClose={() => setDeletePlanetOpen(false)}
-        />
+        <>
+          <PlanetDeleteModal
+            data={planetData}
+            open={deletePlanetOpen}
+            onClose={() => setDeletePlanetOpen(false)}
+          />
+          <EditPlanetModal
+            data={planetData}
+            open={editPlanetOpen}
+            onClose={() => setEditPlanetOpen(false)}
+          />
+        </>
       )}
     </>
   );
