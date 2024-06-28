@@ -4,7 +4,6 @@ import { mediaQueries } from "../../theme";
 
 export const StyledTable = styled.table`
   width: 100%;
-  max-width: 900px;
 
   border-collapse: collapse;
 `;

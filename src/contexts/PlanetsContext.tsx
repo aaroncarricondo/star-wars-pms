@@ -10,10 +10,7 @@ import {
 } from "react";
 
 import { Planet } from "../domain/Planet";
-import {
-  GET_ALL_PLANETS,
-  GetAllPlanetsQueryResult,
-} from "../queries/AllPlanetsQuery";
+import { GET_ALL_PLANETS } from "../queries/AllPlanetsQuery";
 
 type PlanetsContextData = {
   fetchData: () => Promise<void>;
@@ -41,7 +38,7 @@ type PlanetsProviderProps = {
 
 export const enum PlanetsActionType {
   Add = "Add",
-  Remove = "Remove",
+  Delete = "Delete",
   Edit = "Edit",
   Set = "Set",
 }
@@ -63,7 +60,7 @@ const planetsReducer = (state: Planet[], action: PlanetsAction) => {
       }
       break;
     }
-    case PlanetsActionType.Remove: {
+    case PlanetsActionType.Delete: {
       if (action.planetToRemoveId) {
         stateToReturn = state.filter(
           ({ id }) => id !== action.planetToRemoveId,
@@ -115,7 +112,7 @@ export const PlanetsProvider = ({ children }: PlanetsProviderProps) => {
   );
 
   const [fetchAllPlanets, { data, error, loading }] =
-    useLazyQuery<GetAllPlanetsQueryResult>(GET_ALL_PLANETS);
+    useLazyQuery(GET_ALL_PLANETS);
 
   useEffect(() => {
     if (!loading && data?.allPlanets?.planets) {

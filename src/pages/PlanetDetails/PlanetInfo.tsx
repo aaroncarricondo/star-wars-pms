@@ -1,8 +1,14 @@
+import styled from "styled-components";
+
 import { Space } from "../../components/Space";
 import { Spinner } from "../../components/Spinner";
 import { H2, H3 } from "../../components/Titles";
 import { Planet } from "../../domain/Planet";
 import { stringArrayToList } from "../../utils/arrayUtils";
+
+const PlanetInfoSpace = styled(Space)`
+  width: 30%;
+`;
 
 type PlanetInfoProps = {
   data: Planet | undefined;
@@ -10,7 +16,7 @@ type PlanetInfoProps = {
 
 export const PlanetInfo = ({ data }: PlanetInfoProps) => {
   return (
-    <Space $direction="column">
+    <PlanetInfoSpace $direction="column">
       <H2>Planet details</H2>
       {data ? (
         <>
@@ -34,7 +40,7 @@ export const PlanetInfo = ({ data }: PlanetInfoProps) => {
       ) : (
         <Spinner />
       )}
-    </Space>
+    </PlanetInfoSpace>
   );
 };
 

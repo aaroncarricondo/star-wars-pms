@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql, TypedDocumentNode } from "@apollo/client";
 
 import { Planet } from "../domain/Planet";
 
-export const GET_ALL_PLANETS = gql`
+export const GET_ALL_PLANETS: TypedDocumentNode<GetAllPlanetsQueryResult> = gql`
   query AllPlanets {
     allPlanets {
       planets {
@@ -17,7 +17,7 @@ export const GET_ALL_PLANETS = gql`
   }
 `;
 
-export type GetAllPlanetsQueryResult = {
+type GetAllPlanetsQueryResult = {
   allPlanets: {
     planets: Planet[];
   };

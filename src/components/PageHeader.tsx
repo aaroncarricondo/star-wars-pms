@@ -11,7 +11,7 @@ type PageHeaderProps = {
 export const PageHeader = ({ title, toolbox }: PageHeaderProps) => {
   useEffect(() => {
     document.title = title;
-  }, []);
+  }, [title]);
 
   return (
     <Space $justify="space-between" $align="center">
