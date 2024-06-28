@@ -1,13 +1,7 @@
 import { ReactNode, useEffect } from "react";
-import styled from "styled-components";
 
 import { Space } from "./Space";
-
-const PageHeaderTitle = styled.h1`
-  text-transform: uppercase;
-
-  color: ${({ theme }) => theme.colors.primary};
-`;
+import { H1 } from "./Titles";
 
 type PageHeaderProps = {
   title: string;
@@ -21,8 +15,8 @@ export const PageHeader = ({ title, toolbox }: PageHeaderProps) => {
 
   return (
     <Space $justify="space-between" $align="center">
-      <PageHeaderTitle>{title}</PageHeaderTitle>
-      {toolbox && toolbox}
+      <H1>{title}</H1>
+      {toolbox && <Space>{toolbox}</Space>}
     </Space>
   );
 };

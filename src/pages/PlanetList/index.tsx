@@ -63,10 +63,10 @@ export const PlanetList = () => {
       <PageHeader
         title="Planetary archive"
         toolbox={
-          <Space>
+          <>
             <Input placeholder="Search" />
             <Button onClick={() => setNewPlanetOpen(true)}>New planet</Button>
-          </Space>
+          </>
         }
       />
       <Space $justify="center">

@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         element: <PlanetList />,
       },
       {
-        path: ":id",
+        path: ":planetId",
         element: <PlanetDetails />,
       },
       {
