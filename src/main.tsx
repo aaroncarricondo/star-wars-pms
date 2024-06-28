@@ -46,17 +46,6 @@ const router = createBrowserRouter([
 const client = new ApolloClient({
   uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
   cache: new InMemoryCache({}),
-  // No cache, isn't needed right now
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "ignore",
-    },
-    query: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "all",
-    },
-  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

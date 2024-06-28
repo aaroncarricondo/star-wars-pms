@@ -29,10 +29,10 @@ export const PlanetDetails = () => {
     useLazyQuery(GET_PLANET_BY_ID);
 
   useEffect(() => {
-    const planet = planets.find(({ id }) => id === planetId);
-    if (planetId && planet) {
+    const foundPlanet = planets.find(({ id }) => id === planetId);
+    if (foundPlanet && planetId) {
       fetchPlanetResidents({ variables: { planetId } });
-      setPlanetData(planet);
+      setPlanetData(foundPlanet);
     } else {
       setPlanetNotFound(true);
     }
