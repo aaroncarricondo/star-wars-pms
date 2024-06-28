@@ -54,18 +54,22 @@ type PlanetsAction = {
 };
 
 const planetsReducer = (state: Planet[], action: PlanetsAction) => {
+  let stateToReturn: Planet[] = state;
+
   switch (action.type) {
     case PlanetsActionType.Add: {
       if (action.newPlanet) {
-        return [...state, action.newPlanet];
+        stateToReturn = [...state, action.newPlanet];
       }
-      return state;
+      break;
     }
     case PlanetsActionType.Remove: {
       if (action.planetToRemoveId) {
-        return state.filter(({ id }) => id !== action.planetToRemoveId);
+        stateToReturn = state.filter(
+          ({ id }) => id !== action.planetToRemoveId,
+        );
       }
-      return state;
+      break;
     }
     case PlanetsActionType.Edit: {
       if (action.newPlanet) {
@@ -76,17 +80,22 @@ const planetsReducer = (state: Planet[], action: PlanetsAction) => {
         if (planetIndex !== -1) {
           const newState = [...state];
           state[planetIndex] = action.newPlanet;
-          return newState;
+          stateToReturn = newState;
         }
       }
-      return state;
+      break;
     }
     case PlanetsActionType.Set: {
-      return action.planets ?? [];
+      stateToReturn = action.planets ?? [];
+      break;
     }
     default:
       throw new Error("Planet action type not supported");
   }
+
+  localStorage.setItem(PLANETS_DATA_KEY, JSON.stringify(stateToReturn));
+
+  return stateToReturn;
 };
 
 const PLANETS_DATA_KEY = "planets";
@@ -116,12 +125,6 @@ export const PlanetsProvider = ({ children }: PlanetsProviderProps) => {
       });
     }
   }, [loading]);
-
-  useEffect(() => {
-    if (planets) {
-      localStorage.setItem(PLANETS_DATA_KEY, JSON.stringify(planets));
-    }
-  }, [planets]);
 
   const { allClimates, allTerrains } = useMemo(() => {
     if (!planets) {
