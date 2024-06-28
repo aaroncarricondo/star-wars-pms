@@ -1,12 +1,12 @@
 import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Button } from "../../components/Button";
 import { PageHeader } from "../../components/PageHeader";
 import { Space } from "../../components/Space";
-import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
+import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
 import { PlanetDeleteModal } from "./PlanetDeleteModal";
@@ -15,9 +15,8 @@ import { PlanetResidents } from "./PlanetResidents";
 
 export const PlanetDetails = () => {
   const { planetId } = useParams();
-  const navigate = useNavigate();
 
-  const { planets, planetsDispatch } = usePlanets();
+  const { planets } = usePlanets();
 
   const [planetData, setPlanetData] = useState<Planet>();
   const [planetNotFound, setPlanetNotFound] = useState(false);
@@ -41,17 +40,6 @@ export const PlanetDetails = () => {
       toast.error("Error while retrieving planet residents data");
     }
   }, [error]);
-
-  const onPlanetDeleteClosed = (confirm: boolean) => {
-    setDeletePlanetOpen(false);
-    if (confirm) {
-      planetsDispatch({
-        type: PlanetsActionType.Delete,
-        planetToRemoveId: planetId,
-      });
-      navigate("/");
-    }
-  };
 
   return (
     <>
@@ -82,7 +70,7 @@ export const PlanetDetails = () => {
         <PlanetDeleteModal
           data={planetData}
           open={deletePlanetOpen}
-          onClose={onPlanetDeleteClosed}
+          onClose={() => setDeletePlanetOpen(false)}
         />
       )}
     </>
