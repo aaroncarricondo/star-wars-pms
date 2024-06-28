@@ -1,13 +1,22 @@
-import { createContext, ReactNode, useContext, useMemo, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 
-import { APIPlanet } from "../domain/Planet";
+import { Planet } from "../domain/Planet";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
-const SWAPI_BASE_URL = "https://swapi.dev/api";
+import {
+  GET_ALL_PLANETS,
+  GetAllPlanetsQueryResult,
+} from "../queries/AllPlanetsQuery";
 
 type PlanetsContextData = {
   fetchData: () => Promise<void>;
-  planets: APIPlanet[];
+  planets: Planet[];
   error: Error | undefined;
   isLoading: boolean;
 };
@@ -24,57 +33,31 @@ type PlanetsProviderProps = {
 };
 
 export const PlanetsProvider = ({ children }: PlanetsProviderProps) => {
-  const [planets, setPlanets] = useLocalStorage<APIPlanet[]>("planets");
-  const [error, setError] = useState<Error>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [planets, setPlanets] = useLocalStorage<Planet[]>("planets");
+
+  const [fetchAllPlanets, { data, error, loading }] =
+    useLazyQuery<GetAllPlanetsQueryResult>(GET_ALL_PLANETS);
 
   const fetchData = async () => {
     if (planets === undefined) {
-      setIsLoading(true);
-      try {
-        const planetsAPIData = await fetchPlanets();
-        setPlanets(planetsAPIData);
-      } catch (error) {
-        setError(error as Error);
-      }
-    }
-    setIsLoading(false);
-  };
-
-  const fetchPlanets = async (
-    previousPlanets: APIPlanet[] = [],
-    nextUrl?: string,
-  ): Promise<APIPlanet[]> => {
-    let response: Response;
-    if (nextUrl) {
-      response = await fetch(nextUrl);
-    } else {
-      response = await fetch(`${SWAPI_BASE_URL}/planets`);
-    }
-
-    if (!response.ok) {
-      const responseText = await response.text();
-      throw new Error(`Status: ${response.status}, body: ${responseText}`);
-    }
-
-    const data = await response.json();
-    const aggregatedPlanets = previousPlanets.concat(data.results);
-
-    if (data.next) {
-      return fetchPlanets(aggregatedPlanets, data.next);
-    } else {
-      return aggregatedPlanets;
+      fetchAllPlanets();
     }
   };
+
+  useEffect(() => {
+    if (!loading && data?.allPlanets?.planets) {
+      setPlanets(data.allPlanets.planets);
+    }
+  }, [loading]);
 
   const value = useMemo(() => {
     return {
       fetchData,
       planets: planets ? planets : [],
       error,
-      isLoading,
+      isLoading: loading,
     };
-  }, [planets, isLoading]);
+  }, [planets, loading]);
 
   return (
     <PlanetsContext.Provider value={value}>{children}</PlanetsContext.Provider>

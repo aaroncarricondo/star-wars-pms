@@ -1,5 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -42,13 +43,31 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ThemeProvider theme={darkTheme}>
-    <ToastContainer theme="colored" />
-    <GlobalStyle />
+const client = new ApolloClient({
+  uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
+  cache: new InMemoryCache({}),
+  // No cache, isn't needed right now
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "ignore",
+    },
+    query: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "all",
+    },
+  },
+});
 
-    <PlanetsProvider>
-      <RouterProvider router={router} />
-    </PlanetsProvider>
-  </ThemeProvider>,
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={darkTheme}>
+      <ToastContainer theme="colored" />
+      <GlobalStyle />
+
+      <PlanetsProvider>
+        <RouterProvider router={router} />
+      </PlanetsProvider>
+    </ThemeProvider>
+  </ApolloProvider>,
 );

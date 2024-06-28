@@ -9,13 +9,14 @@ import { Space } from "../components/Space";
 import { Table } from "../components/Table";
 import { ColumnDef } from "../components/Table/types";
 import { usePlanets } from "../contexts/PlanetsContext";
-import { APIPlanet } from "../domain/Planet";
+import { Planet } from "../domain/Planet";
+import { stringArrayToList } from "../utils/arrayUtils";
 
 export const PlanetList = () => {
   const navigate = useNavigate();
   const { planets, error, isLoading, fetchData } = usePlanets();
 
-  useEffect(() => void fetchData());
+  useEffect(() => void fetchData(), []);
 
   useEffect(() => {
     if (isLoading === false && error) {
@@ -23,7 +24,7 @@ export const PlanetList = () => {
     }
   }, [error, isLoading]);
 
-  const columns: ColumnDef<APIPlanet>[] = [
+  const columns: ColumnDef<Planet>[] = [
     {
       key: "name",
       header: "Name",
@@ -36,13 +37,13 @@ export const PlanetList = () => {
     },
     {
       key: "climate",
-      header: "Climate",
-      dataIndex: "climate",
+      header: "Climates",
+      render: ({ climates }) => stringArrayToList(climates),
     },
     {
       key: "terrain",
-      header: "Terrain",
-      dataIndex: "terrain",
+      header: "Terrains",
+      render: ({ terrains }) => stringArrayToList(terrains),
     },
     {
       key: "population",
@@ -51,12 +52,7 @@ export const PlanetList = () => {
     },
   ];
 
-  const onRowClick = (item: APIPlanet) => {
-    const id = item.url.split("/").at(-2);
-    if (id) {
-      navigate(id);
-    }
-  };
+  const onRowClick = ({ id }: Planet) => navigate(id);
 
   return (
     <>
@@ -71,7 +67,7 @@ export const PlanetList = () => {
       />
       <Space $justify="center">
         <Table
-          rowKeyGenerator={(item) => item.url}
+          rowKeyGenerator={({ id }) => id}
           onRowClick={onRowClick}
           data={planets}
           isLoading={isLoading}
