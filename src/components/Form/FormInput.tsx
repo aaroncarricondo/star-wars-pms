@@ -1,12 +1,11 @@
 import { HTMLProps } from "react";
 
-import { Input } from "../Input";
 import { Space } from "../Space";
 import { FormLabel } from "./FormLabel";
+import { Input } from "./Input";
 
 type FormInputProps = {
   label: string;
-  name: string;
 } & HTMLProps<HTMLInputElement>;
 
 export const FormInput = ({

@@ -1,8 +1,8 @@
 export type Planet = {
   id: string;
   name: string;
-  diameter: string;
+  diameter?: number;
   climates: string[];
   terrains: string[];
-  population: string;
+  population?: number;
 };

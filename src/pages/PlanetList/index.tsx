@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
+import { Input } from "../../components/Form/Input";
 import { PageHeader } from "../../components/PageHeader";
 import { Space } from "../../components/Space";
 import { Table } from "../../components/Table";
@@ -55,8 +55,8 @@ export const PlanetList = () => {
     },
   ];
 
-  const onRowClick = ({ id }: Planet) => navigate(id);
-  const onNewPlanetModalClose = () => setNewPlanetOpen(false);
+  const onRowClick = ({ id }: Planet): void => navigate(id);
+  const onNewPlanetModalClose = (): void => setNewPlanetOpen(false);
 
   return (
     <>

@@ -15,6 +15,6 @@ The packages for this project have been selected to ensure minimum package depen
 Inferred from the data retrieved from the GraphQL API, the following restrictions where applied for the planet creation (form):
 1. Name -> Required.
 2. Diameter -> Optional.
-3. Climates -> Required, with unknown as default value, can't be cleared.
-4. Terrains -> Required, with unknown as default value, can't be cleared.
+3. Climates -> Required, with unknown as default value.
+4. Terrains -> Required, with unknown as default value.
 5. Population -> Optional.
