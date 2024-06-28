@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+type ButtonProps = {
+  $secondary?: boolean;
+};
+
+export const Button = styled.button<ButtonProps>`
   background-color: transparent;
   border-color: ${({ theme }) => theme.colors.primary};
   border-style: solid;
   border-width: ${({ theme }) => theme.border.width};
   border-radius: ${({ theme }) => theme.border.radius};
+
+  border: ${({ $secondary }) => ($secondary ? "none" : undefined)};
 
   height: 48px;
   width: auto;

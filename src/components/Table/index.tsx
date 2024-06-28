@@ -1,5 +1,3 @@
-import { HTMLAttributes } from "react";
-
 import { EmptyTableRow } from "./EmptyTableRow";
 import { LoadingTableRow } from "./LoadingTableRow";
 import { StyledTable, StyledTableHeader, StyledTableRow } from "./styles";
@@ -12,8 +10,7 @@ export function Table<TData = never>({
   isLoading,
   rowKeyGenerator,
   onRowClick,
-  ...restProps
-}: TableProps<TData> & HTMLAttributes<HTMLTableElement>) {
+}: TableProps<TData>) {
   const areRowsClickable = !!onRowClick;
   const isEmpty = !isLoading && data.length === 0;
 
@@ -21,7 +18,7 @@ export function Table<TData = never>({
     areRowsClickable ? onRowClick(item) : undefined;
 
   return (
-    <StyledTable {...restProps}>
+    <StyledTable>
       <thead>
         <tr>
           {columns.map(({ header, key, colSpan }) => (

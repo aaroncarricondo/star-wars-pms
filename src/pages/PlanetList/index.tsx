@@ -1,20 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { Button } from "../components/Button";
-import { Input } from "../components/Input";
-import { PageHeader } from "../components/PageHeader";
-import { Space } from "../components/Space";
-import { Table } from "../components/Table";
-import { ColumnDef } from "../components/Table/types";
-import { usePlanets } from "../contexts/PlanetsContext";
-import { Planet } from "../domain/Planet";
-import { stringArrayToList } from "../utils/arrayUtils";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+import { PageHeader } from "../../components/PageHeader";
+import { Space } from "../../components/Space";
+import { Table } from "../../components/Table";
+import { ColumnDef } from "../../components/Table/types";
+import { usePlanets } from "../../contexts/PlanetsContext";
+import { Planet } from "../../domain/Planet";
+import { stringArrayToList } from "../../utils/arrayUtils";
+import { NewPlanetModal } from "./NewPlanetModal";
 
 export const PlanetList = () => {
   const navigate = useNavigate();
   const { planets, error, isLoading, fetchData } = usePlanets();
+
+  const [newPlanetOpen, setNewPlanetOpen] = useState(false);
 
   useEffect(() => void fetchData(), []);
 
@@ -53,15 +56,16 @@ export const PlanetList = () => {
   ];
 
   const onRowClick = ({ id }: Planet) => navigate(id);
+  const onNewPlanetModalClose = () => setNewPlanetOpen(false);
 
   return (
     <>
       <PageHeader
-        title={"Planetary archive"}
+        title="Planetary archive"
         toolbox={
           <Space>
             <Input placeholder="Search" />
-            <Button>New planet</Button>
+            <Button onClick={() => setNewPlanetOpen(true)}>New planet</Button>
           </Space>
         }
       />
@@ -74,6 +78,7 @@ export const PlanetList = () => {
           columns={columns}
         />
       </Space>
+      <NewPlanetModal open={newPlanetOpen} onClose={onNewPlanetModalClose} />
     </>
   );
 };
