@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import { Modal } from "../../components/Modal";
 import { PlanetForm } from "../../components/pages/PlanetForm";
 import { PopupLayout } from "../../components/PopupLayout";
@@ -17,6 +19,7 @@ export const NewPlanetModal = ({ open, onClose }: NewPlanetModalProps) => {
       type: PlanetsActionType.Add,
       newPlanet,
     });
+    toast.success("Changes saved");
 
     onClose();
   };

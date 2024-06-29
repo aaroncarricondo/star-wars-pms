@@ -25,9 +25,12 @@ describe("Planet list", () => {
     beforeAll(() => {
       spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
         planets: [],
+        allClimates: [],
+        allTerrains: [],
         isLoading: false,
         error: new Error("Some error"),
         fetchData: async () => undefined,
+        planetsDispatch: async () => undefined,
       }));
     });
 
@@ -50,9 +53,12 @@ describe("Planet list", () => {
     it("should show a spinner inside the table", () => {
       spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
         planets: [],
+        allClimates: [],
+        allTerrains: [],
         isLoading: true,
         error: undefined,
         fetchData: async () => undefined,
+        planetsDispatch: async () => undefined,
       }));
 
       customRender(<PlanetList />);
@@ -70,23 +76,18 @@ describe("Planet list", () => {
       spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
         planets: [
           {
+            id: "TatooineId",
             name: "Tatooine",
-            climate: "",
-            diameter: "",
-            gravity: "",
-            orbital_period: "",
-            population: "",
-            residents: [],
-            rotation_period: [],
-            surface_water: "",
-            terrain: "",
-            url: "planets/1/",
-            films: [],
+            climates: ["unknown"],
+            terrains: ["unknown"],
           },
         ],
+        allClimates: [],
+        allTerrains: [],
         isLoading: false,
         error: undefined,
         fetchData: async () => undefined,
+        planetsDispatch: async () => undefined,
       }));
 
       customRender(<PlanetList />);

@@ -68,7 +68,8 @@ type StyledTableRowProps = {
 
 export const StyledTableRow = styled.tr<StyledTableRowProps>`
   &:hover {
-    background-color: ${({ theme }) => theme.colors.highlight};
+    background-color: ${({ theme, $isClickable = false }) =>
+      $isClickable ? theme.colors.highlight : "transparent"};
   }
 
   cursor: ${({ $isClickable = false }) =>

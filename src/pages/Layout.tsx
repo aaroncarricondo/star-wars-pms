@@ -1,8 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-import RebelAllianceLogo from "/rebel-alliance.svg";
-
+// @ts-expect-error: Unreachable code error
+import RebelAllianceLogo from "../assets/rebel-alliance.svg";
+import { Icon } from "../components/Icon";
 import { Space } from "../components/Space";
 
 const NavBar = styled.nav`
@@ -17,11 +18,6 @@ const NavBar = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-`;
-
-const NavBarLogo = styled.img`
-  height: 24px;
-  width: auto;
 `;
 
 const NavBarTitle = styled(Link)`
@@ -44,7 +40,7 @@ export const Layout = () => {
     <>
       <NavBar>
         <Space $align="center">
-          <NavBarLogo src={RebelAllianceLogo}></NavBarLogo>
+          <Icon $height="24px" src={RebelAllianceLogo} />
           <NavBarTitle to="/">rebelalliance.org</NavBarTitle>
         </Space>
       </NavBar>

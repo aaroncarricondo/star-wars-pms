@@ -5,6 +5,11 @@ type ButtonProps = {
 };
 
 export const Button = styled.button<ButtonProps>`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.small};
+  align-items: center;
+  justify-content: space-between;
+
   background-color: transparent;
   border-color: ${({ theme }) => theme.colors.primary};
   border-style: solid;
@@ -19,7 +24,6 @@ export const Button = styled.button<ButtonProps>`
 
   font-family: "Oxanium";
   text-transform: uppercase;
-  line-height: 1.1rem;
   color: ${({ theme }) => theme.colors.text};
 
   &:not(:disabled):hover {

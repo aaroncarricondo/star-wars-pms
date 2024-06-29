@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+// @ts-expect-error: Unreachable code error
+import AddIcon from "../../assets/add-icon.svg";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Input";
+import { Icon } from "../../components/Icon";
 import { PageHeader } from "../../components/PageHeader";
-import { Space } from "../../components/Space";
 import { Table } from "../../components/Table";
 import { ColumnDef } from "../../components/Table/types";
 import { usePlanets } from "../../contexts/PlanetsContext";
@@ -65,19 +67,20 @@ export const PlanetList = () => {
         toolbox={
           <>
             <Input placeholder="Search" />
-            <Button onClick={() => setNewPlanetOpen(true)}>New planet</Button>
+            <Button onClick={() => setNewPlanetOpen(true)}>
+              <Icon src={AddIcon} />
+              New planet
+            </Button>
           </>
         }
       />
-      <Space $justify="center">
-        <Table
-          rowKeyGenerator={({ id }) => id}
-          onRowClick={onRowClick}
-          data={planets}
-          isLoading={isLoading}
-          columns={columns}
-        />
-      </Space>
+      <Table
+        rowKeyGenerator={({ id }) => id}
+        onRowClick={onRowClick}
+        data={planets}
+        isLoading={isLoading}
+        columns={columns}
+      />
       <NewPlanetModal open={newPlanetOpen} onClose={onNewPlanetModalClose} />
     </>
   );

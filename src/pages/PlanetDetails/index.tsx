@@ -3,14 +3,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
+// @ts-expect-error: Unreachable code error
+import DeleteIcon from "../../assets/delete-icon.svg";
+// @ts-expect-error: Unreachable code error
+import EditIcon from "../../assets/edit-icon.svg";
 import { Button } from "../../components/Button";
+import { Icon } from "../../components/Icon";
 import { PageHeader } from "../../components/PageHeader";
 import { Space } from "../../components/Space";
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
+import { DeletePlanetModal } from "./DeletePlanetModal";
 import { EditPlanetModal } from "./EditPlanetModal";
-import { PlanetDeleteModal } from "./PlanetDeleteModal";
 import { PlanetInfo } from "./PlanetInfo";
 import { PlanetResidents } from "./PlanetResidents";
 
@@ -52,8 +57,14 @@ export const PlanetDetails = () => {
           planetData &&
           !planetNotFound && (
             <>
-              <Button onClick={() => setEditPlanetOpen(true)}>Edit</Button>
-              <Button onClick={() => setDeletePlanetOpen(true)}>Delete</Button>
+              <Button onClick={() => setEditPlanetOpen(true)}>
+                <Icon src={EditIcon} />
+                Edit
+              </Button>
+              <Button onClick={() => setDeletePlanetOpen(true)}>
+                <Icon src={DeleteIcon} />
+                Delete
+              </Button>
             </>
           )
         }
@@ -71,7 +82,7 @@ export const PlanetDetails = () => {
 
       {planetData && (
         <>
-          <PlanetDeleteModal
+          <DeletePlanetModal
             data={planetData}
             open={deletePlanetOpen}
             onClose={() => setDeletePlanetOpen(false)}
