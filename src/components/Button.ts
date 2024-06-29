@@ -31,6 +31,9 @@ export const Button = styled.button<ButtonProps>`
   }
   &:disabled {
     opacity: 0.6;
+    cursor: not-allowed;
   }
-  cursor: pointer;
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 `;

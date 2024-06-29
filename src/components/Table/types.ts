@@ -12,7 +12,7 @@ export type ColumnDef<TData = never> = {
 export type TableProps<TData = never> = {
   data: TData[];
   columns: ColumnDef<TData>[];
-  isLoading?: boolean;
+  isLoading: boolean;
   rowKeyGenerator: (item: TData) => Key;
   onRowClick?: (item: TData) => void;
 };
