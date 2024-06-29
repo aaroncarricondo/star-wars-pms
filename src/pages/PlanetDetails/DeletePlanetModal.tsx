@@ -1,12 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import styled from "styled-components";
 
 import { Button } from "../../components/Button";
-import { Modal } from "../../components/Modal";
-import { PopupLayout } from "../../components/PopupLayout";
+import { Modal } from "../../components/Modal/Modal";
+import { ModalLayout } from "../../components/Modal/ModalLayout";
 import { Space } from "../../components/Space";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
+
+const DeletePlanetContainer = styled.div`
+  max-width: 380px;
+`;
 
 type DeletePlanetModalProps = {
   open: boolean;
@@ -35,21 +40,23 @@ export const DeletePlanetModal = ({
 
   return (
     <Modal open={open} closeOnEscape={false} closeOnDocumentClick={false}>
-      <PopupLayout title="Delete planet">
-        <p>
-          Deleting planets can cause problems to jedis such as Obi Wan Kenobi in
-          future episodes.
-        </p>
-        <p>{`Are you sure you want to delete the planet ${data.name}?`}</p>
-        <Space $justify="flex-end">
-          <Button type="button" $secondary onClick={() => onClose()}>
-            Cancel
-          </Button>
-          <Button type="button" onClick={onConfirm}>
-            Confirm
-          </Button>
-        </Space>
-      </PopupLayout>
+      <DeletePlanetContainer>
+        <ModalLayout title="Delete planet">
+          <p>
+            Deleting planets can cause problems to jedis such as Obi Wan Kenobi
+            in future episodes.
+          </p>
+          <p>{`Are you sure you want to delete the planet ${data.name}?`}</p>
+          <Space $justify="flex-end">
+            <Button type="button" $secondary onClick={() => onClose()}>
+              Cancel
+            </Button>
+            <Button type="button" onClick={onConfirm}>
+              Confirm
+            </Button>
+          </Space>
+        </ModalLayout>
+      </DeletePlanetContainer>
     </Modal>
   );
 };

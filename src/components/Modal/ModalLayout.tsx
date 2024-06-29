@@ -19,11 +19,11 @@ const PopupContent = styled.div`
   padding: ${({ theme }) => theme.spacing.normal};
 `;
 
-type PopupLayoutProps = {
+type ModalLayoutProps = {
   title: string;
 } & PropsWithChildren;
 
-export const PopupLayout = ({ title, children }: PopupLayoutProps) => {
+export const ModalLayout = ({ title, children }: ModalLayoutProps) => {
   return (
     <>
       <PopupHeader>{title}</PopupHeader>

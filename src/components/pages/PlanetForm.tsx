@@ -1,4 +1,5 @@
 import { SyntheticEvent, useState } from "react";
+import styled from "styled-components";
 
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
@@ -6,6 +7,10 @@ import { Button } from "../Button";
 import { FormInput } from "../Form/FormInput";
 import { FormSelect, SelectOption } from "../Form/FormSelect";
 import { Space } from "../Space";
+
+const StyledForm = styled.form`
+  max-width: 400px;
+`;
 
 const mapDefaultSelectedOptions = (values: string[]): SelectOption[] => {
   return values.map((value) => ({ label: value, value: value }));
@@ -47,7 +52,7 @@ export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <StyledForm onSubmit={onFormSubmit}>
       <Space
         $direction="column"
         $justify="space-between"
@@ -107,6 +112,6 @@ export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
           <Button type="submit">Save</Button>
         </Space>
       </Space>
-    </form>
+    </StyledForm>
   );
 };

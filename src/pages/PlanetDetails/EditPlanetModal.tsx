@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 
-import { Modal } from "../../components/Modal";
+import { Modal } from "../../components/Modal/Modal";
 import { PlanetForm } from "../../components/pages/PlanetForm";
-import { PopupLayout } from "../../components/PopupLayout";
+import { ModalLayout } from "../../components/Modal/ModalLayout";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 
@@ -31,9 +31,9 @@ export const EditPlanetModal = ({
 
   return (
     <Modal open={open} closeOnEscape={false} closeOnDocumentClick={false}>
-      <PopupLayout title="Edit planet">
+      <ModalLayout title="Edit planet">
         <PlanetForm data={data} onSubmit={onSubmit} onCancel={onClose} />
-      </PopupLayout>
+      </ModalLayout>
     </Modal>
   );
 };
