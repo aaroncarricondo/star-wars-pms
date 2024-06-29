@@ -19,7 +19,7 @@ export const FormInput = ({
       <FormLabel htmlFor={name} $required={required}>
         {label}
       </FormLabel>
-      <Input name={name} required={required} {...restProps} />
+      <Input id={name} name={name} required={required} {...restProps} />
     </Space>
   );
 };

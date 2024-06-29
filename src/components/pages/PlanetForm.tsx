@@ -64,6 +64,7 @@ export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
           name="name"
           required
           defaultValue={data?.name}
+          autoComplete="planet-name"
         />
         <FormInput
           label="Diameter (km)"

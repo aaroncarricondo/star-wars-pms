@@ -27,6 +27,7 @@ export function FormSelect({
         {label}
       </FormLabel>
       <ReactSelect
+        inputId={name}
         name={name}
         required={required}
         {...restProps}

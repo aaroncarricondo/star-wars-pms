@@ -12,7 +12,10 @@ import { Table } from "../../components/Table";
 import { ColumnDef } from "../../components/Table/types";
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
-import { stringArrayToList } from "../../utils/arrayUtils";
+import {
+  stringArrayIncludesCaseInsensitive,
+  stringArrayToList,
+} from "../../utils/arrayUtils";
 import { NewPlanetModal } from "./NewPlanetModal";
 
 export const PlanetList = () => {
@@ -20,6 +23,7 @@ export const PlanetList = () => {
   const { planets, error, isLoading, fetchData } = usePlanets();
 
   const [newPlanetOpen, setNewPlanetOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => void fetchData(), []);
 
@@ -60,13 +64,40 @@ export const PlanetList = () => {
   const onRowClick = ({ id }: Planet): void => navigate(id);
   const onNewPlanetModalClose = (): void => setNewPlanetOpen(false);
 
+  const getFilteredPlanets = () => {
+    if (!search) {
+      return planets;
+    }
+
+    const loweredSearch = search.toLowerCase();
+    return planets.filter(({ name, climates, terrains }) => {
+      if (name.toLowerCase().includes(loweredSearch)) {
+        return true;
+      }
+
+      if (stringArrayIncludesCaseInsensitive(climates, loweredSearch)) {
+        return true;
+      }
+
+      if (stringArrayIncludesCaseInsensitive(terrains, loweredSearch)) {
+        return true;
+      }
+
+      return false;
+    });
+  };
+
   return (
     <>
       <PageHeader
         title="Planetary archive"
         toolbox={
           <>
-            <Input placeholder="Search" />
+            <Input
+              name="search"
+              placeholder="Search"
+              onChange={(event) => setSearch(event.target.value)}
+            />
             <Button onClick={() => setNewPlanetOpen(true)}>
               <Icon src={AddIcon} />
               New planet
@@ -77,7 +108,7 @@ export const PlanetList = () => {
       <Table
         rowKeyGenerator={({ id }) => id}
         onRowClick={onRowClick}
-        data={planets}
+        data={getFilteredPlanets()}
         isLoading={isLoading}
         columns={columns}
       />

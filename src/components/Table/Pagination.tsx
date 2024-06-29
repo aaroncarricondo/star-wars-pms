@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import styled from "styled-components";
 
 // @ts-expect-error: Unreachable code error
@@ -42,6 +42,8 @@ export const Pagination = ({
   isLoading,
   setPage,
 }: PaginationProps) => {
+  useEffect(() => setPage(1), [dataLength]);
+
   const totalPages = Math.ceil(dataLength / PAGE_SIZE);
 
   const goPrevious = () => {

@@ -144,8 +144,8 @@ export const PlanetsProvider = ({ children }: PlanetsProviderProps) => {
     }
 
     return {
-      allClimates: Array.from(uniqueClimates),
-      allTerrains: Array.from(uniqueTerrains),
+      allClimates: Array.from(uniqueClimates).sort(),
+      allTerrains: Array.from(uniqueTerrains).sort(),
     };
   }, [planets]);
 
