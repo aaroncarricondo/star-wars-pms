@@ -1,6 +1,7 @@
 export const stringArrayToList = (stringArray: string[]): string => {
   let text = "";
-  stringArray.sort().forEach((value) => {
+
+  [...stringArray].sort().forEach((value) => {
     text += `${value}, `;
   });
 

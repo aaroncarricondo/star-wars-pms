@@ -7,7 +7,9 @@ import { FormInput } from "../Form/FormInput";
 import { FormSelect, SelectOption } from "../Form/FormSelect";
 import { Space } from "../Space";
 
-const UNKNOWN_OPTION = { label: "unknown", value: "unknown" };
+const mapDefaultSelectedOptions = (values: string[]): SelectOption[] => {
+  return values.map((value) => ({ label: value, value: value }));
+};
 
 type PlanetForm = {
   data?: Planet;
@@ -18,12 +20,12 @@ type PlanetForm = {
 export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
   const { allClimates, allTerrains } = usePlanets();
 
-  const [selectedClimates, setSelectedClimates] = useState<SelectOption[]>([
-    UNKNOWN_OPTION,
-  ]);
-  const [selectedTerrains, setSelectedTerrains] = useState<SelectOption[]>([
-    UNKNOWN_OPTION,
-  ]);
+  const [selectedClimates, setSelectedClimates] = useState<SelectOption[]>(
+    () => (data ? mapDefaultSelectedOptions(data.climates) : []),
+  );
+  const [selectedTerrains, setSelectedTerrains] = useState<SelectOption[]>(
+    () => (data ? mapDefaultSelectedOptions(data.terrains) : []),
+  );
 
   const onFormSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -77,7 +79,6 @@ export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
           onChange={(selectedOptions) =>
             setSelectedClimates(selectedOptions as SelectOption[])
           }
-          defaultValue={UNKNOWN_OPTION}
         />
         <FormSelect
           label="Terrains"
