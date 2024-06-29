@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { mediaQueries } from "../../theme";
+import { Icon } from "../Icon";
 
 export const StyledTable = styled.table`
   width: 100%;
@@ -37,7 +38,11 @@ const ellipsisCss = css<EllipsisProps>`
     `}
 `;
 
-export const StyledTableHeader = styled.th<EllipsisProps>`
+type StyledTableHeaderProps = {
+  $canBeSorted: boolean;
+} & EllipsisProps;
+
+export const StyledTableHeader = styled.th<StyledTableHeaderProps>`
   background-color: ${({ theme }) => theme.colors.headerBackground};
 
   text-align: start;
@@ -45,6 +50,13 @@ export const StyledTableHeader = styled.th<EllipsisProps>`
 
   ${paddingCss}
   ${ellipsisCss}
+
+  cursor: ${({ $canBeSorted }) => ($canBeSorted ? "pointer" : undefined)};
+
+  transition: opacity 0.25s;
+  &:hover {
+    opacity: ${({ $canBeSorted }) => ($canBeSorted ? 0.8 : undefined)};
+  }
 
   &:first-child {
     border-top-left-radius: ${({ theme }) => theme.border.radius};
@@ -74,4 +86,12 @@ export const StyledTableRow = styled.tr<StyledTableRowProps>`
 
   cursor: ${({ $isClickable = false }) =>
     $isClickable ? "pointer" : undefined};
+`;
+
+type SortIconProps = {
+  $show: boolean;
+};
+
+export const SortIcon = styled(Icon)<SortIconProps>`
+  visibility: ${({ $show }) => ($show ? undefined : "hidden")};
 `;

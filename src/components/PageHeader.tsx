@@ -19,7 +19,7 @@ export const PageHeader = ({ title, toolbox }: PageHeaderProps) => {
   }, [title]);
 
   return (
-    <PageHeaderSpace $justify="space-between" $align="center">
+    <PageHeaderSpace $justify="space-between" $align="center" $wrap>
       <H1>{title}</H1>
       {toolbox && <Space>{toolbox}</Space>}
     </PageHeaderSpace>

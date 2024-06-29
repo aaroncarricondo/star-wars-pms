@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 
 import { Modal } from "../../components/Modal/Modal";
-import { PlanetForm } from "../../components/pages/PlanetForm";
 import { ModalLayout } from "../../components/Modal/ModalLayout";
+import { PlanetForm } from "../../components/pages/PlanetForm";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 

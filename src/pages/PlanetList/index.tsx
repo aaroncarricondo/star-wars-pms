@@ -16,6 +16,7 @@ import {
   stringArrayIncludesCaseInsensitive,
   stringArrayToList,
 } from "../../utils/arrayUtils";
+import { stringSorter } from "../../utils/sortUtils";
 import { NewPlanetModal } from "./NewPlanetModal";
 
 export const PlanetList = () => {
@@ -38,26 +39,41 @@ export const PlanetList = () => {
       key: "name",
       header: "Name",
       dataIndex: "name",
+      sorter: (planetA, planetB) => stringSorter(planetA.name, planetB.name),
     },
     {
       key: "diameter",
       header: "Diameter (km)",
       dataIndex: "diameter",
+      sorter: (planetA, planetB) =>
+        (planetA.diameter ?? -1) - (planetB.diameter ?? -1),
     },
     {
       key: "climate",
       header: "Climates",
       render: ({ climates }) => stringArrayToList(climates),
+      sorter: (planetA, planetB) =>
+        stringSorter(
+          [...planetA.climates].sort()[0],
+          [...planetB.climates].sort()[0],
+        ),
     },
     {
       key: "terrain",
       header: "Terrains",
       render: ({ terrains }) => stringArrayToList(terrains),
+      sorter: (planetA, planetB) =>
+        stringSorter(
+          [...planetA.climates].sort()[0],
+          [...planetB.climates].sort()[0],
+        ),
     },
     {
       key: "population",
       header: "Population",
       dataIndex: "population",
+      sorter: (planetA, planetB) =>
+        (planetA.population ?? -1) - (planetB.population ?? -1),
     },
   ];
 

@@ -9,7 +9,7 @@ type TableColumnProps<TData = never> = {
 };
 
 export function TableColumn<TData>({ column, item }: TableColumnProps<TData>) {
-  const { key, dataIndex, render, colSpan, ellipsis } = column;
+  const { key, dataIndex, render, ellipsis } = column;
 
   if (render) {
     const renderContent = render(item) ?? EMPTY_PLACEHOLDER;
@@ -19,12 +19,7 @@ export function TableColumn<TData>({ column, item }: TableColumnProps<TData>) {
       title = renderContent;
     }
     return (
-      <StyledTableColumn
-        key={key}
-        colSpan={colSpan}
-        $ellipsis={ellipsis}
-        title={title}
-      >
+      <StyledTableColumn key={key} $ellipsis={ellipsis} title={title}>
         {renderContent}
       </StyledTableColumn>
     );
@@ -36,12 +31,7 @@ export function TableColumn<TData>({ column, item }: TableColumnProps<TData>) {
     }
 
     return (
-      <StyledTableColumn
-        key={key}
-        colSpan={colSpan}
-        $ellipsis={ellipsis}
-        title={title}
-      >
+      <StyledTableColumn key={key} $ellipsis={ellipsis} title={title}>
         {text ?? EMPTY_PLACEHOLDER}
       </StyledTableColumn>
     );

@@ -3,9 +3,10 @@ import { useState } from "react";
 import { EmptyTableRow } from "./EmptyTableRow";
 import { LoadingTableRow } from "./LoadingTableRow";
 import { Pagination } from "./Pagination";
-import { StyledTable, StyledTableHeader, StyledTableRow } from "./styles";
+import { StyledTable, StyledTableRow } from "./styles";
 import { TableColumn } from "./TableColumn";
-import { TableProps } from "./types";
+import { TableHeader } from "./TableHeader";
+import { ColumnDef, SortDirection, SortStatus, TableProps } from "./types";
 
 export const PAGE_SIZE = 10;
 
@@ -17,24 +18,56 @@ export function Table<TData = never>({
   onRowClick,
 }: TableProps<TData>) {
   const [page, setPage] = useState(1);
+  const [sortStatus, setSortStatus] = useState<SortStatus<TData>>();
 
   const areRowsClickable = !!onRowClick;
-  const isEmpty = !isLoading && data.length === 0;
-
   const onTableRowClick = (item: TData) =>
     areRowsClickable ? onRowClick(item) : undefined;
 
-  const paginatedData = data.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const changeSortStatus = (
+    { key, sorter }: ColumnDef<TData>,
+    direction: SortDirection,
+  ) => {
+    setSortStatus({
+      key,
+      sorter,
+      direction,
+    });
+  };
+
+  const getSortedData = (): TData[] => {
+    if (sortStatus && sortStatus.sorter) {
+      const sortedData = [...data].sort(sortStatus.sorter);
+
+      if (sortStatus.direction === SortDirection.Desc) {
+        return sortedData.reverse();
+      } else {
+        return sortedData;
+      }
+    }
+
+    return data;
+  };
+
+  const paginatedData = getSortedData().slice(
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE,
+  );
+
+  const isEmpty = !isLoading && data.length === 0;
 
   return (
     <>
       <StyledTable>
         <thead>
           <tr>
-            {columns.map(({ header, key, colSpan }) => (
-              <StyledTableHeader key={key} colSpan={colSpan}>
-                {header}
-              </StyledTableHeader>
+            {columns.map((column) => (
+              <TableHeader
+                key={column.key}
+                column={column}
+                sortStatus={sortStatus}
+                changeSortStatus={changeSortStatus}
+              />
             ))}
           </tr>
         </thead>
