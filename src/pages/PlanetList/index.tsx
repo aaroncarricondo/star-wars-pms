@@ -7,7 +7,7 @@ import AddIcon from "../../assets/add-icon.svg";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Input";
 import { Icon } from "../../components/Icon";
-import { PageHeader } from "../../components/PageHeader";
+import { Page } from "../../components/Layout/Page";
 import { Table } from "../../components/Table";
 import { ColumnDef } from "../../components/Table/types";
 import { usePlanets } from "../../contexts/PlanetsContext";
@@ -104,23 +104,22 @@ export const PlanetList = () => {
   };
 
   return (
-    <>
-      <PageHeader
-        title="Planetary archive"
-        toolbox={
-          <>
-            <Input
-              name="search"
-              placeholder="Search"
-              onChange={(event) => setSearch(event.target.value)}
-            />
-            <Button onClick={() => setNewPlanetOpen(true)}>
-              <Icon src={AddIcon} />
-              New planet
-            </Button>
-          </>
-        }
-      />
+    <Page
+      title="Planetary archive"
+      toolbox={
+        <>
+          <Input
+            name="search"
+            placeholder="Search"
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <Button onClick={() => setNewPlanetOpen(true)}>
+            <Icon src={AddIcon} />
+            New planet
+          </Button>
+        </>
+      }
+    >
       <Table
         rowKeyGenerator={({ id }) => id}
         onRowClick={onRowClick}
@@ -129,6 +128,6 @@ export const PlanetList = () => {
         columns={columns}
       />
       <NewPlanetModal open={newPlanetOpen} onClose={onNewPlanetModalClose} />
-    </>
+    </Page>
   );
 };
