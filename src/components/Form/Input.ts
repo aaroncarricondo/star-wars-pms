@@ -14,6 +14,7 @@ export const Input = styled.input`
   padding: ${({ theme }) => theme.spacing.small};
 
   outline: none;
+  appearance: none;
 
   &:-webkit-autofill,
   :-webkit-autofill:hover,
