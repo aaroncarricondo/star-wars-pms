@@ -16,12 +16,9 @@ export const StyledTable = styled.table`
 const paddingCss = css`
   // Media breakpoints
   @media ${mediaQueries.xs} {
-    padding: ${({ theme }) => theme.spacing.extraSmall};
-  }
-  @media ${mediaQueries.sm} {
     padding: ${({ theme }) => theme.spacing.small};
   }
-  @media ${mediaQueries.xxl} {
+  @media ${mediaQueries.sm} {
     padding: ${({ theme }) => theme.spacing.normal};
   }
 `;

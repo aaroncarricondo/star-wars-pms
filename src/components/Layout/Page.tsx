@@ -21,6 +21,8 @@ const BackLink = styled(Link)`
   display: flex;
   align-items: center;
   text-transform: uppercase;
+
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const PageHeaderSpace = styled(Space)`
