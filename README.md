@@ -1,5 +1,7 @@
 # Star Wars - Planet Management System
 
+[Preview](https://starwarspms.web.app/)
+
 ## Setup and run
 In order to execute the application:
 1. You'll need to [install](https://bun.sh/docs/installation) bun in your system.
