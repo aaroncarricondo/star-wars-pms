@@ -28,11 +28,8 @@ const NavBarTitle = styled(Link)`
 `;
 
 const Content = styled.div`
-  margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.normal};
   margin-top: ${({ theme }) => theme.navbarHeight};
-
-  max-width: 1000px;
 `;
 
 export const Layout = () => {

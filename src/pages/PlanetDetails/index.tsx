@@ -10,8 +10,8 @@ import EditIcon from "../../assets/edit-icon.svg";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
 import { Col } from "../../components/Layout/Col";
+import { Page } from "../../components/Layout/Page";
 import { Row } from "../../components/Layout/Row";
-import { PageHeader } from "../../components/PageHeader";
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
@@ -51,26 +51,25 @@ export const PlanetDetails = () => {
   }, [error]);
 
   return (
-    <>
-      <PageHeader
-        title={planetNotFound ? "Planet not found" : planetData?.name ?? ""}
-        toolbox={
-          planetData &&
-          !planetNotFound && (
-            <>
-              <Button onClick={() => setEditPlanetOpen(true)}>
-                <Icon src={EditIcon} />
-                Edit
-              </Button>
-              <Button onClick={() => setDeletePlanetOpen(true)}>
-                <Icon src={DeleteIcon} />
-                Delete
-              </Button>
-            </>
-          )
-        }
-      />
-
+    <Page
+      title={planetNotFound ? "Planet not found" : planetData?.name ?? ""}
+      goBack="/"
+      toolbox={
+        planetData &&
+        !planetNotFound && (
+          <>
+            <Button onClick={() => setEditPlanetOpen(true)}>
+              <Icon src={EditIcon} />
+              Edit
+            </Button>
+            <Button onClick={() => setDeletePlanetOpen(true)}>
+              <Icon src={DeleteIcon} />
+              Delete
+            </Button>
+          </>
+        )
+      }
+    >
       {!planetNotFound && (
         <Row $gap="large">
           <Col $xs={24} $sm={10}>
@@ -99,6 +98,6 @@ export const PlanetDetails = () => {
           />
         </>
       )}
-    </>
+    </Page>
   );
 };
