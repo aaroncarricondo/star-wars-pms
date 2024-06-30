@@ -57,7 +57,7 @@ export const Pagination = ({
   return (
     <PaginationContainer
       $justify="flex-end"
-      $show={isLoading || totalPages > 1}
+      $show={!isLoading || totalPages > 1}
     >
       <PreviousNextButton disabled={page === 1} onClick={goPrevious}>
         <Icon src={ArrowLeft} />
