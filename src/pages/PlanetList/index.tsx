@@ -7,7 +7,7 @@ import AddIcon from "../../assets/add-icon.svg";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Form/Input";
 import { Icon } from "../../components/Icon";
-import { PageHeader } from "../../components/Layout/PageHeader";
+import { PageHeader } from "../../components/PageHeader";
 import { Table } from "../../components/Table";
 import { ColumnDef } from "../../components/Table/types";
 import { usePlanets } from "../../contexts/PlanetsContext";

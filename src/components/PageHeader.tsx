@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
 
-import { Space } from "./Space";
+import { Space } from "./Layout/Space";
 import { H1 } from "./Titles";
 
 const PageHeaderSpace = styled(Space)`
