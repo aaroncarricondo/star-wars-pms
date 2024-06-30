@@ -11,7 +11,7 @@ import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
 import { Col } from "../../components/Layout/Col";
 import { Row } from "../../components/Layout/Row";
-import { PageHeader } from "../../components/Layout/PageHeader";
+import { PageHeader } from "../../components/PageHeader";
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
