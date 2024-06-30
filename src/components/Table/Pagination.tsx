@@ -7,7 +7,7 @@ import ArrowLeft from "../../assets/arrow-left-icon.svg";
 import ArrowRight from "../../assets/arrow-right-icon.svg";
 import { Button } from "../Button";
 import { Icon } from "../Icon";
-import { Space } from "../Space";
+import { Space } from "../Layout/Space";
 import { PAGE_SIZE } from ".";
 
 type PaginationContainerProps = {

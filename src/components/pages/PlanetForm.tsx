@@ -6,7 +6,7 @@ import { Planet } from "../../domain/Planet";
 import { Button } from "../Button";
 import { FormInput } from "../Form/FormInput";
 import { FormSelect, SelectOption } from "../Form/FormSelect";
-import { Space } from "../Space";
+import { Space } from "../Layout/Space";
 
 const StyledForm = styled.form`
   max-width: 400px;
@@ -82,6 +82,7 @@ export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
             value: climate,
           }))}
           isMulti
+          closeMenuOnSelect={false}
           onChange={(selectedOptions) =>
             setSelectedClimates(selectedOptions as SelectOption[])
           }
@@ -96,6 +97,7 @@ export const PlanetForm = ({ data, onCancel, onSubmit }: PlanetForm) => {
             value: terrain,
           }))}
           isMulti
+          closeMenuOnSelect={false}
           onChange={(selectedOptions) =>
             setSelectedTerrains(selectedOptions as SelectOption[])
           }

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-import { Space } from "../../components/Space";
+import { Space } from "../../components/Layout/Space";
 import { Spinner } from "../../components/Spinner";
 import { H2, H3 } from "../../components/Titles";
 import { Planet } from "../../domain/Planet";
 import { stringArrayToList } from "../../utils/arrayUtils";
 
 const PlanetInfoSpace = styled(Space)`
-  width: 30%;
+  width: 100%;
 `;
 
 type PlanetInfoProps = {

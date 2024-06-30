@@ -9,8 +9,9 @@ import DeleteIcon from "../../assets/delete-icon.svg";
 import EditIcon from "../../assets/edit-icon.svg";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
-import { PageHeader } from "../../components/PageHeader";
-import { Space } from "../../components/Space";
+import { Col } from "../../components/Layout/Col";
+import { Row } from "../../components/Layout/Row";
+import { PageHeader } from "../../components/Layout/PageHeader";
 import { usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 import { GET_PLANET_BY_ID } from "../../queries/PlanetByIdQuery";
@@ -71,13 +72,17 @@ export const PlanetDetails = () => {
       />
 
       {!planetNotFound && (
-        <Space>
-          <PlanetInfo data={planetData} />
-          <PlanetResidents
-            data={data?.planet?.residentConnection?.residents}
-            isLoading={loading}
-          />
-        </Space>
+        <Row $gap="large">
+          <Col $xs={24} $sm={10}>
+            <PlanetInfo data={planetData} />
+          </Col>
+          <Col $xs={24} $sm={14}>
+            <PlanetResidents
+              data={data?.planet?.residentConnection?.residents}
+              isLoading={loading}
+            />
+          </Col>
+        </Row>
       )}
 
       {planetData && (

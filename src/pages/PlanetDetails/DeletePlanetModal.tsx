@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Button } from "../../components/Button";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalLayout } from "../../components/Modal/ModalLayout";
-import { Space } from "../../components/Space";
+import { Space } from "../../components/Layout/Space";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 

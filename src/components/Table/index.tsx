@@ -3,7 +3,7 @@ import { useState } from "react";
 import { EmptyTableRow } from "./EmptyTableRow";
 import { LoadingTableRow } from "./LoadingTableRow";
 import { Pagination } from "./Pagination";
-import { StyledTable, StyledTableRow } from "./styles";
+import { StyledTable, StyledTableRow, TableContainer } from "./styles";
 import { TableColumn } from "./TableColumn";
 import { TableHeader } from "./TableHeader";
 import { ColumnDef, SortDirection, SortStatus, TableProps } from "./types";
@@ -58,39 +58,42 @@ export function Table<TData = never>({
 
   return (
     <>
-      <StyledTable>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <TableHeader
-                key={column.key}
-                column={column}
-                sortStatus={sortStatus}
-                changeSortStatus={changeSortStatus}
-              />
-            ))}
-          </tr>
-        </thead>
+      <TableContainer>
+        <StyledTable>
+          <thead>
+            <tr>
+              {columns.map((column) => (
+                <TableHeader
+                  key={column.key}
+                  column={column}
+                  sortStatus={sortStatus}
+                  changeSortStatus={changeSortStatus}
+                />
+              ))}
+            </tr>
+          </thead>
 
-        <tbody>
-          {isEmpty && <EmptyTableRow />}
-          {isLoading ? (
-            <LoadingTableRow />
-          ) : (
-            paginatedData.map((item) => (
-              <StyledTableRow
-                key={rowKeyGenerator(item)}
-                $isClickable={areRowsClickable}
-                onClick={() => onTableRowClick(item)}
-              >
-                {columns.map((column) => (
-                  <TableColumn key={column.key} column={column} item={item} />
-                ))}
-              </StyledTableRow>
-            ))
-          )}
-        </tbody>
-      </StyledTable>
+          <tbody>
+            {isEmpty && <EmptyTableRow />}
+            {isLoading ? (
+              <LoadingTableRow />
+            ) : (
+              paginatedData.map((item) => (
+                <StyledTableRow
+                  key={rowKeyGenerator(item)}
+                  $isClickable={areRowsClickable}
+                  onClick={() => onTableRowClick(item)}
+                >
+                  {columns.map((column) => (
+                    <TableColumn key={column.key} column={column} item={item} />
+                  ))}
+                </StyledTableRow>
+              ))
+            )}
+          </tbody>
+        </StyledTable>
+      </TableContainer>
+
       <Pagination
         page={page}
         dataLength={data.length}

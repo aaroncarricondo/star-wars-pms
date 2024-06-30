@@ -1,7 +1,7 @@
 import ReactSelect, { Props as ReactSelectProps } from "react-select";
 import { useTheme } from "styled-components";
 
-import { Space } from "../Space";
+import { Space } from "../Layout/Space";
 import { FormLabel } from "./FormLabel";
 
 export type SelectOption<TValue = string> = {

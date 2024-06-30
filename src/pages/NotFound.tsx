@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Space } from "../components/Space";
+import { Space } from "../components/Layout/Space";
 
 const NotFoundContainer = styled(Space)`
   font-size: 80px;

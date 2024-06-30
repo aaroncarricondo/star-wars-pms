@@ -30,7 +30,7 @@ export const Button = styled.button<ButtonProps>`
     background-color: ${({ theme }) => theme.colors.headerBackground};
   }
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.3;
     cursor: not-allowed;
   }
   &:not(:disabled) {

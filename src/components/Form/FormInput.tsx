@@ -1,6 +1,6 @@
 import { HTMLProps } from "react";
 
-import { Space } from "../Space";
+import { Space } from "../Layout/Space";
 import { FormLabel } from "./FormLabel";
 import { Input } from "./Input";
 

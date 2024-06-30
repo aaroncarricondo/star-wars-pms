@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Space } from "../Space";
+import { Space } from "../Layout/Space";
 import { Spinner } from "../Spinner";
 import { StyledTableColumn } from "./styles";
 

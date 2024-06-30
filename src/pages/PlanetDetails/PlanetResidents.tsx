@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Space } from "../../components/Space";
+import { Space } from "../../components/Layout/Space";
 import { Table } from "../../components/Table";
 import { ColumnDef } from "../../components/Table/types";
 import { H2 } from "../../components/Titles";
@@ -8,7 +8,7 @@ import { Resident } from "../../domain/Resident";
 import { stringSorter } from "../../utils/sortUtils";
 
 const PlanetResidentsSpace = styled(Space)`
-  width: 70%;
+  width: 100%;
 `;
 
 type PlanetResidentsProps = {

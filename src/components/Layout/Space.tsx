@@ -7,7 +7,7 @@ type JustifyAlign =
   | "space-around"
   | "center";
 
-type BaseSpaceProps = {
+export type BaseSpaceProps = {
   $direction?: "row" | "row-reverse" | "column" | "column-reverse";
   $justify?: JustifyAlign;
   $align?: JustifyAlign;

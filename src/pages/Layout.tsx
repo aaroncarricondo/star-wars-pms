@@ -4,7 +4,7 @@ import styled from "styled-components";
 // @ts-expect-error: Unreachable code error
 import RebelAllianceLogo from "../assets/rebel-alliance.svg";
 import { Icon } from "../components/Icon";
-import { Space } from "../components/Space";
+import { Space } from "../components/Layout/Space";
 
 const NavBar = styled.nav`
   background-color: ${({ theme }) => theme.colors.headerBackground};

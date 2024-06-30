@@ -2,7 +2,7 @@
 import TriangleDownIcon from "../../assets/triangle-down-icon.svg";
 // @ts-expect-error: Unreachable code error
 import TriangleUpIcon from "../../assets/triangle-up-icon.svg";
-import { Space } from "../Space";
+import { Space } from "../Layout/Space";
 import { SortIcon, StyledTableHeader } from "./styles";
 import { ColumnDef, SortDirection, SortStatus } from "./types";
 
@@ -45,12 +45,12 @@ export function TableHeader<TData>({
           <Space $direction="column" $gap="extraSmall">
             <SortIcon
               $show={!isBeingSorted || ascentActive}
-              $height="8px"
+              $height="7px"
               src={TriangleUpIcon}
             />
             <SortIcon
               $show={!isBeingSorted || descendActive}
-              $height="8px"
+              $height="7px"
               src={TriangleDownIcon}
             />
           </Space>

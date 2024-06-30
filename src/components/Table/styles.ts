@@ -3,6 +3,10 @@ import styled, { css } from "styled-components";
 import { mediaQueries } from "../../theme";
 import { Icon } from "../Icon";
 
+export const TableContainer = styled.div`
+  overflow: auto;
+`;
+
 export const StyledTable = styled.table`
   width: 100%;
 
