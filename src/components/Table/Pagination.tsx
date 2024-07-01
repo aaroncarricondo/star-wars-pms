@@ -10,14 +10,8 @@ import { Icon } from "../Icon";
 import { Space } from "../Layout/Space";
 import { PAGE_SIZE } from ".";
 
-type PaginationContainerProps = {
-  $show: boolean;
-};
-
-const PaginationContainer = styled(Space)<PaginationContainerProps>`
+const PaginationContainer = styled(Space)`
   margin-top: ${({ theme }) => theme.spacing.normal};
-
-  display: ${({ $show }) => ($show ? undefined : "none")};
 `;
 
 const PreviousNextButton = styled(Button)``;
@@ -54,11 +48,8 @@ export const Pagination = ({
     setPage((prev) => (prev + 1 > totalPages ? prev : prev + 1));
   };
 
-  return (
-    <PaginationContainer
-      $justify="flex-end"
-      $show={totalPages > 1 && !isLoading}
-    >
+  return totalPages > 1 && !isLoading ? (
+    <PaginationContainer $justify="flex-end">
       <PreviousNextButton disabled={page === 1} onClick={goPrevious}>
         <Icon src={ArrowLeft} />
       </PreviousNextButton>
@@ -69,5 +60,5 @@ export const Pagination = ({
         <Icon src={ArrowRight} />
       </PreviousNextButton>
     </PaginationContainer>
-  );
+  ) : undefined;
 };

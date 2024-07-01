@@ -22,10 +22,10 @@ export const GET_PLANET_BY_ID: TypedDocumentNode<
     planet(id: $planetId) {
       residentConnection {
         residents {
+          id
           name
           birthYear
           gender
-          id
         }
       }
     }
