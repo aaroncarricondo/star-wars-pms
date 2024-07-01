@@ -19,7 +19,7 @@ import {
 import { stringSorter } from "../../utils/sortUtils";
 import { NewPlanetModal } from "./NewPlanetModal";
 
-export const PlanetList = () => {
+const PlanetList = () => {
   const navigate = useNavigate();
   const { planets, error, isLoading, fetchData } = usePlanets();
 
@@ -131,3 +131,5 @@ export const PlanetList = () => {
     </Page>
   );
 };
+
+export default PlanetList;

@@ -8,7 +8,7 @@ const NotFoundContainer = styled(Space)`
     `calc(100vh - ${theme.navbarHeight} - ${theme.spacing.normal} * 2)`};
 `;
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <NotFoundContainer
       $direction="column"
@@ -21,3 +21,5 @@ export const NotFound = () => {
     </NotFoundContainer>
   );
 };
+
+export default NotFound;

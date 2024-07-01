@@ -13,7 +13,7 @@ import {
 import * as ReactRouter from "react-router-dom";
 
 import * as PlanetsContext from "../contexts/PlanetsContext";
-import { PlanetList } from "../pages/PlanetList";
+import PlanetList from "../pages/PlanetList";
 import { customRender } from "./utils/customRender";
 
 describe("Planet list", () => {

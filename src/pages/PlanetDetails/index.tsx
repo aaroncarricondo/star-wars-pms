@@ -20,7 +20,7 @@ import { EditPlanetModal } from "./EditPlanetModal";
 import { PlanetInfo } from "./PlanetInfo";
 import { PlanetResidents } from "./PlanetResidents";
 
-export const PlanetDetails = () => {
+const PlanetDetails = () => {
   const { planetId } = useParams();
 
   const { planets } = usePlanets();
@@ -101,3 +101,5 @@ export const PlanetDetails = () => {
     </Page>
   );
 };
+
+export default PlanetDetails;
