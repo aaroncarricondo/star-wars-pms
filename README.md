@@ -12,7 +12,7 @@ In order to execute the application:
 In order to test the application:
 1. You'll need to [install](https://bun.sh/docs/installation) bun in your system.
 2. In the root folder run `` bun install ``.
-3. Finally execute the tests with `` bun test ``.
+3. Finally execute the tests with `` bun run test ``.
 
 ## End-to-end test
 *To be implemented*

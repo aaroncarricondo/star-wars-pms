@@ -23,16 +23,16 @@ export function TableHeader<TData>({
   const canBeSorted = !!column.sorter;
 
   const isBeingSorted = sortStatus?.key === column.key;
-  const ascentActive =
+  const ascendingActive =
     isBeingSorted && sortStatus.direction === SortDirection.Asc;
-  const descendActive =
+  const descendingActive =
     isBeingSorted && sortStatus.direction === SortDirection.Desc;
 
   const toggleSort = () => {
-    if (!isBeingSorted || descendActive) {
+    if (!isBeingSorted || descendingActive) {
       changeSortStatus(column, SortDirection.Asc);
     }
-    if (ascentActive) {
+    if (ascendingActive) {
       changeSortStatus(column, SortDirection.Desc);
     }
   };
@@ -42,14 +42,18 @@ export function TableHeader<TData>({
       <Space $justify="space-between" $gap="small" $wrap>
         {column.header}
         {canBeSorted && (
-          <Space $direction="column" $gap="extraSmall">
+          <Space
+            data-testid="order-controls"
+            $direction="column"
+            $gap="extraSmall"
+          >
             <SortIcon
-              $show={!isBeingSorted || ascentActive}
+              $show={!isBeingSorted || ascendingActive}
               $height="7px"
               src={TriangleUpIcon}
             />
             <SortIcon
-              $show={!isBeingSorted || descendActive}
+              $show={!isBeingSorted || descendingActive}
               $height="7px"
               src={TriangleDownIcon}
             />

@@ -1,10 +1,7 @@
-/// <reference lib="dom" />
-
 import { cleanup } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "bun:test";
 
 import { Page } from "../../components/Layout/Page";
-import { customRender } from "../utils/customRender";
+import { customRender } from "../testUtils/customRender";
 
 describe("Page", () => {
   afterEach(() => {

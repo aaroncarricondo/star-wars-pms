@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { Button } from "../../components/Button";
+import { Space } from "../../components/Layout/Space";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalLayout } from "../../components/Modal/ModalLayout";
-import { Space } from "../../components/Layout/Space";
 import { PlanetsActionType, usePlanets } from "../../contexts/PlanetsContext";
 import { Planet } from "../../domain/Planet";
 

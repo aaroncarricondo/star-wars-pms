@@ -9,29 +9,17 @@ type TableColumnProps<TData = never> = {
 };
 
 export function TableColumn<TData>({ column, item }: TableColumnProps<TData>) {
-  const { key, dataIndex, render, ellipsis } = column;
+  const { key, dataIndex, render } = column;
 
   if (render) {
     const renderContent = render(item) ?? EMPTY_PLACEHOLDER;
 
-    let title: string | undefined = undefined;
-    if (ellipsis && typeof renderContent === "string") {
-      title = renderContent;
-    }
-    return (
-      <StyledTableColumn key={key} $ellipsis={ellipsis} title={title}>
-        {renderContent}
-      </StyledTableColumn>
-    );
+    return <StyledTableColumn key={key}>{renderContent}</StyledTableColumn>;
   } else if (dataIndex) {
     const text = item[dataIndex] as string;
-    let title: string | undefined = undefined;
-    if (ellipsis) {
-      title = text;
-    }
 
     return (
-      <StyledTableColumn key={key} $ellipsis={ellipsis} title={title}>
+      <StyledTableColumn key={key}>
         {text ?? EMPTY_PLACEHOLDER}
       </StyledTableColumn>
     );

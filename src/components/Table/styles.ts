@@ -23,25 +23,9 @@ const paddingCss = css`
   }
 `;
 
-type EllipsisProps = { $ellipsis?: boolean };
-
-const ellipsisCss = css<EllipsisProps>`
-  ${({ $ellipsis }) =>
-    $ellipsis
-      ? `
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `
-      : `
-      word-wrap: break-word;
-      white-space: normal;
-    `}
-`;
-
 type StyledTableHeaderProps = {
   $canBeSorted: boolean;
-} & EllipsisProps;
+};
 
 export const StyledTableHeader = styled.th<StyledTableHeaderProps>`
   background-color: ${({ theme }) => theme.colors.headerBackground};
@@ -50,7 +34,6 @@ export const StyledTableHeader = styled.th<StyledTableHeaderProps>`
   text-transform: uppercase;
 
   ${paddingCss}
-  ${ellipsisCss}
 
   cursor: ${({ $canBeSorted }) => ($canBeSorted ? "pointer" : undefined)};
 
@@ -67,9 +50,8 @@ export const StyledTableHeader = styled.th<StyledTableHeaderProps>`
   }
 `;
 
-export const StyledTableColumn = styled.td<EllipsisProps>`
+export const StyledTableColumn = styled.td`
   ${paddingCss}
-  ${ellipsisCss}
 
   border-bottom: ${({ theme }) =>
     `${theme.border.width} solid ${theme.colors.headerBackground}`};

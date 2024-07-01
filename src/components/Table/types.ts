@@ -17,7 +17,6 @@ export type ColumnDef<TData = never> = {
   key: string;
   header: ReactNode;
   dataIndex?: keyof TData;
-  ellipsis?: boolean;
   render?: (item: TData) => ReactNode;
   sorter?: SortFunction<TData>;
 };

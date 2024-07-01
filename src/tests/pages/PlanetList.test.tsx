@@ -1,20 +1,8 @@
-/// <reference lib="dom" />
-
 import { cleanup, screen } from "@testing-library/react";
-import {
-  afterEach,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  mock,
-  spyOn,
-} from "bun:test";
-import * as ReactRouter from "react-router-dom";
 
-import * as PlanetsContext from "../contexts/PlanetsContext";
-import PlanetList from "../pages/PlanetList";
-import { customRender } from "./utils/customRender";
+import * as PlanetsContext from "../../contexts/PlanetsContext";
+import PlanetList from "../../pages/PlanetList";
+import { customRender } from "../testUtils/customRender";
 
 describe("Planet list", () => {
   afterEach(() => {
@@ -23,7 +11,7 @@ describe("Planet list", () => {
 
   describe("some error occurred", () => {
     beforeAll(() => {
-      spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
+      vi.spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
         planets: [],
         allClimates: [],
         allTerrains: [],
@@ -38,20 +26,20 @@ describe("Planet list", () => {
       customRender(<PlanetList />);
 
       expect(
-        screen.getByText("Error while retrieving planets data"),
+        screen.queryByText("Error while retrieving planets data"),
       ).toBeTruthy();
     });
 
     it("should show empty table", async () => {
       customRender(<PlanetList />);
 
-      expect(screen.getByText("No data")).toBeTruthy();
+      expect(screen.queryByText("No data")).toBeTruthy();
     });
   });
 
   describe("planets data is loading", () => {
     it("should show a spinner inside the table", () => {
-      spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
+      vi.spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
         planets: [],
         allClimates: [],
         allTerrains: [],
@@ -63,20 +51,28 @@ describe("Planet list", () => {
 
       customRender(<PlanetList />);
 
-      expect(screen.getByTestId("spinner")).toBeTruthy();
+      expect(screen.queryByTestId("spinner")).toBeTruthy();
     });
   });
 
   describe("on user interaction", () => {
     it("should navigate when clicking a table row", () => {
-      const mockedNavigationFunction = mock(() => undefined);
-      spyOn(ReactRouter, "useNavigate").mockImplementation(
-        () => mockedNavigationFunction,
-      );
-      spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
+      const mocks = vi.hoisted(() => {
+        return {
+          useNavigate: vi.fn(),
+        };
+      });
+      vi.mock("react-router-dom", async (importOriginal) => {
+        const mod = await importOriginal<typeof import("react-router-dom")>();
+        return {
+          ...mod,
+          useNavigate: () => mocks.useNavigate,
+        };
+      });
+      vi.spyOn(PlanetsContext, "usePlanets").mockImplementation(() => ({
         planets: [
           {
-            id: "TatooineId",
+            id: "1",
             name: "Tatooine",
             climates: ["unknown"],
             terrains: ["unknown"],
@@ -93,7 +89,7 @@ describe("Planet list", () => {
       customRender(<PlanetList />);
 
       screen.getByText("Tatooine").click();
-      expect(mockedNavigationFunction).toBeCalled();
+      expect(mocks.useNavigate).toBeCalled();
     });
   });
 });
