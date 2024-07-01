@@ -16,6 +16,10 @@ export const Input = styled.input`
   outline: none;
   appearance: none;
 
+  &:focus {
+    border-bottom-color: ${({ theme }) => theme.colors.primary};
+  }
+
   &:-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus,

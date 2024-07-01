@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 
@@ -5,6 +6,7 @@ import styled from "styled-components";
 import RebelAllianceLogo from "../assets/rebel-alliance.svg";
 import { Icon } from "../components/Icon";
 import { Space } from "../components/Layout/Space";
+import { PageLoader } from "../components/PageLoader";
 
 const NavBar = styled.nav`
   background-color: ${({ theme }) => theme.colors.headerBackground};
@@ -42,7 +44,9 @@ export const Layout = () => {
         </Space>
       </NavBar>
       <Content>
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </Content>
     </>
   );

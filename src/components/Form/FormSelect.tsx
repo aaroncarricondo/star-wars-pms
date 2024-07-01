@@ -32,12 +32,14 @@ export function FormSelect({
         required={required}
         {...restProps}
         styles={{
-          control: (baseStyles) => ({
+          control: (baseStyles, state) => ({
             ...baseStyles,
             backgroundColor: "transparent",
             border: "none",
             borderRadius: 0,
-            borderColor: `${theme.colors.text} !important`,
+            borderColor: state.isFocused
+              ? `${theme.colors.primary} !important`
+              : `${theme.colors.text} !important`,
             borderBottomWidth: theme.border.width,
             borderBottomStyle: "solid",
             boxShadow: "none",

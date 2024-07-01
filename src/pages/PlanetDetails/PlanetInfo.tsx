@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// @ts-expect-error: Unreachable code error
+import VenusImage from "../../assets/venus-transparent.png";
 import { Space } from "../../components/Layout/Space";
 import { Spinner } from "../../components/Spinner";
 import { H2, H3 } from "../../components/Titles";
@@ -8,6 +10,10 @@ import { stringArrayToList } from "../../utils/arrayUtils";
 
 const PlanetInfoSpace = styled(Space)`
   width: 100%;
+`;
+
+const PlanetImage = styled.img`
+  max-width: 250px;
 `;
 
 type PlanetInfoProps = {
@@ -20,6 +26,7 @@ export const PlanetInfo = ({ data }: PlanetInfoProps) => {
       <H2>Planet details</H2>
       {data ? (
         <>
+          <PlanetImage src={VenusImage} />
           <PlanetDetailsInfoProperty
             title="Diameter (km)"
             content={data.diameter}
