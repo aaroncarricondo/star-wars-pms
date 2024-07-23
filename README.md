@@ -1,6 +1,8 @@
 # Star Wars - Planet Management System
 
-[Preview](https://starwarspms.web.app/)
+React application consuming [Star Wars GraphQL API](https://studio.apollographql.com/public/star-wars-swapi/variant/current/home).
+
+See the [preview](https://starwarspms.web.app/).
 
 ## Setup and run
 In order to execute the application:
